@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Future Scope &amp; Monetization - NUTRACIA</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #0f172a;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: #0f172a;
+            overflow: hidden;
+        }
+
+        /* Background Elements - Solid shapes */
+        .bg-element-1 {
+            position: absolute;
+            top: -150px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background-color: rgba(16, 185, 129, 0.03); /* Emerald tint */
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .bg-element-2 {
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background-color: rgba(99, 102, 241, 0.03); /* Indigo tint */
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .header {
+            padding: 2rem 4rem 1rem 4rem;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+            flex-shrink: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 0 4rem 2rem 4rem;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Section Titles */
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: #94a3b8;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Roadmap Styles */
+        .roadmap-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            position: relative;
+            padding-top: 1rem;
+        }
+
+        /* Connecting Line */
+        .roadmap-line {
+            position: absolute;
+            top: 1rem;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.1);
+            z-index: 0;
+        }
+
+        .phase-card {
+            flex: 1;
+            background-color: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.25rem;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.2s;
+        }
+
+        .phase-card:hover {
+            background-color: rgba(30, 41, 59, 0.7);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Phase Indicator (The dot on top) */
+        .phase-dot {
+            position: absolute;
+            top: -1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #0f172a; /* Match bg to hide line behind */
+            border: 2px solid;
+            z-index: 2;
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+
+        .phase-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .phase-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .phase-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .phase-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .phase-item i {
+            margin-top: 3px;
+            font-size: 0.7rem;
+        }
+
+        /* Color Themes for Phases */
+        .phase-1 { border-top: 3px solid #60a5fa; }
+        .phase-1 .phase-dot { border-color: #60a5fa; box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.1); }
+        .phase-1 .phase-time { color: #93c5fd; }
+        .phase-1 .phase-item i { color: #60a5fa; }
+
+        .phase-2 { border-top: 3px solid #a78bfa; }
+        .phase-2 .phase-dot { border-color: #a78bfa; box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.1); }
+        .phase-2 .phase-time { color: #c4b5fd; }
+        .phase-2 .phase-item i { color: #a78bfa; }
+
+        .phase-3 { border-top: 3px solid #f472b6; }
+        .phase-3 .phase-dot { border-color: #f472b6; box-shadow: 0 0 0 4px rgba(244, 114, 182, 0.1); }
+        .phase-3 .phase-time { color: #fbcfe8; }
+        .phase-3 .phase-item i { color: #f472b6; }
+
+        /* Monetization Grid */
+        .monetization-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .rev-card {
+            background-color: rgba(15, 23, 42, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.2s;
+        }
+
+        .rev-card:hover {
+            background-color: rgba(30, 41, 59, 0.6);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .rev-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .rev-content {
+            flex: 1;
+        }
+
+        .rev-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #f1f5f9;
+            margin-bottom: 2px;
+        }
+
+        .rev-desc {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            line-height: 1.3;
+        }
+
+        /* Revenue Stream Colors */
+        .rev-gold .rev-icon { background-color: rgba(251, 191, 36, 0.1); color: #fbbf24; }
+        .rev-teal .rev-icon { background-color: rgba(45, 212, 191, 0.1); color: #2dd4bf; }
+        .rev-orange .rev-icon { background-color: rgba(251, 146, 60, 0.1); color: #fb923c; }
+        .rev-green .rev-icon { background-color: rgba(52, 211, 153, 0.1); color: #34d399; }
+        .rev-slate .rev-icon { background-color: rgba(148, 163, 184, 0.1); color: #94a3b8; }
+        .rev-blue .rev-icon { background-color: rgba(96, 165, 250, 0.1); color: #60a5fa; }
+
+    </style>
+</head>
+<body style="">
+<div class="slide-container">
+<div class="bg-element-1"></div>
+<div class="bg-element-2"></div>
+<!-- Header -->
+<div class="header">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-1 bg-indigo-500 rounded-full"></div>
+<p class="text-indigo-400 font-bold uppercase tracking-widest text-sm">Roadmap &amp; Sustainability(Future Scope)</p>
+</div>
+<h1 class="text-3xl font-bold text-white leading-tight" style="font-family: 'Space Grotesk', sans-serif;">
+                    NUTRACIA 2.0 — Where We Go From Here
+                </h1>
+</div>
+<div class="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-lg">
+<i class="fa-solid fa-rocket text-indigo-400"></i>
+<div class="text-right">
+<p class="text-[10px] text-slate-400 uppercase tracking-wide">Current Version</p>
+<p class="text-sm font-bold text-white">v1.0 (MVP)</p>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<div class="main-content">
+<!-- Roadmap Section -->
+<div>
+<div class="section-label">
+<i class="fa-solid fa-code-branch text-blue-400"></i>
+<p>Development Phases</p>
+<div class="section-line"></div>
+</div>
+<div class="roadmap-container">
+<div class="roadmap-line"></div>
+<!-- Phase 1 -->
+<div class="phase-card phase-1">
+<div class="phase-dot"></div>
+<div class="phase-header">
+<p class="phase-title">Platform Intelligence</p>
+<span class="phase-time">0-3 MONTHS</span>
+</div>
+<ul class="phase-list">
+<li class="phase-item">
+<i class="fa-solid fa-chart-pie"></i>
+<p><strong>Health Analytics Dashboard:</strong> Correlate mood, sleep, and diet trends.</p>
+</li>
+<li class="phase-item">
+<i class="fa-solid fa-user-doctor"></i>
+<p><strong>AI Symptom Checker:</strong> Triage urgency and suggest care steps.</p>
+</li>
+<li class="phase-item">
+<i class="fa-solid fa-star"></i>
+<p><strong>Wellness Score:</strong> Daily 0-100 composite health metric.</p>
+</li>
+</ul>
+</div>
+<!-- Phase 2 -->
+<div class="phase-card phase-2">
+<div class="phase-dot"></div>
+<div class="phase-header">
+<p class="phase-title">Care Continuity</p>
+<span class="phase-time">3-6 MONTHS</span>
+</div>
+<ul class="phase-list">
+<li class="phase-item">
+<i class="fa-solid fa-calendar-check"></i>
+<p><strong>Direct Booking:</strong> Schedule doctor appointments via Practo API.</p>
+</li>
+<li class="phase-item">
+<i class="fa-solid fa-pills"></i>
+<p><strong>Med Tracker:</strong> Dosage logs, refill alerts &amp; supplement guide.</p>
+</li>
+<li class="phase-item">
+<i class="fa-solid fa-watch-fitness"></i>
+<p><strong>Wearable Sync:</strong> Integrate Google Fit &amp; Apple Health data.</p>
+</li>
+</ul>
+</div>
+<!-- Phase 3 -->
+<div class="phase-card phase-3">
+<div class="phase-dot"></div>
+<div class="phase-header">
+<p class="phase-title">Community &amp; Language</p>
+<span class="phase-time">6-12 MONTHS</span>
+</div>
+<ul class="phase-list">
+<li class="phase-item">
+<i class="fa-solid fa-users"></i>
+<p><strong>Wellness Circles:</strong> Anonymous, AI-moderated peer support groups.</p>
+</li>
+<li class="phase-item">
+<i class="fa-solid fa-language"></i>
+<p><strong>Multilingual:</strong> UI support for 6 major Indian languages.</p>
+</li>
+<li class="phase-item">
+<i class="fa-solid fa-microphone-lines"></i>
+<p><strong>Vernacular Voice:</strong> Hindi/Tamil voice therapy via Deepgram.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Monetization Section -->
+<div class="flex-1 flex flex-col">
+<div class="section-label mt-2">
+<i class="fa-solid fa-coins text-yellow-400"></i>
+<p>Monetization &amp; Sustainability Models</p>
+<div class="section-line"></div>
+</div>
+<div class="monetization-grid">
+<!-- Stream 1 -->
+<div class="rev-card rev-gold">
+<div class="rev-icon"><i class="fa-solid fa-crown"></i></div>
+<div class="rev-content">
+<p class="rev-title">NUTRACIA Pro</p>
+<p class="rev-desc">Freemium tier (₹99/mo). Unlocks advanced analytics, history, and HD voice.</p>
+</div>
+</div>
+<!-- Stream 2 -->
+<div class="rev-card rev-teal">
+<div class="rev-icon"><i class="fa-solid fa-user-nutrition"></i></div>
+<div class="rev-content">
+<p class="rev-title">Dietician Marketplace</p>
+<p class="rev-desc">20-30% commission on consultations booked with verified nutritionists.</p>
+</div>
+</div>
+<!-- Stream 3 -->
+<div class="rev-card rev-orange">
+<div class="rev-icon"><i class="fa-solid fa-dumbbell"></i></div>
+<div class="rev-content">
+<p class="rev-title">Trainer Marketplace</p>
+<p class="rev-desc">Connect users with certified trainers for custom programming.</p>
+</div>
+</div>
+<!-- Stream 4 -->
+<div class="rev-card rev-green">
+<div class="rev-icon"><i class="fa-solid fa-tag"></i></div>
+<div class="rev-content">
+<p class="rev-title">Pharmacy Affiliate</p>
+<p class="rev-desc">Revenue share from supplement purchases via PharmEasy/1mg.</p>
+</div>
+</div>
+<!-- Stream 5 -->
+<div class="rev-card rev-slate">
+<div class="rev-icon"><i class="fa-solid fa-building"></i></div>
+<div class="rev-content">
+<p class="rev-title">Corporate B2B</p>
+<p class="rev-desc">White-labeled wellness SaaS for employee health programs.</p>
+</div>
+</div>
+<!-- Stream 6 -->
+<div class="rev-card rev-blue">
+<div class="rev-icon"><i class="fa-solid fa-database"></i></div>
+<div class="rev-content">
+<p class="rev-title">Data Insights</p>
+<p class="rev-desc">Aggregated, anonymized population health trends for researchers.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

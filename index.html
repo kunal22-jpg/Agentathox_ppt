@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NUTRACIA — AgentathonX 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal: #0d9488;
+    --teal-light: #5eead4;
+    --navy: #0d1b2a;
+    --navy2: #152335;
+    --muted: #64748b;
+    --white: #ffffff;
+    --bg: #080f18;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Inter', sans-serif;
+    color: var(--white);
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+  }
+
+  /* ── TOP BAR ─────────────────────────────────────────── */
+  #topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 46px;
+    background: rgba(13,27,42,0.96);
+    border-bottom: 1px solid rgba(13,148,136,0.25);
+    flex-shrink: 0;
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+  .tb-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--teal-light);
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tb-logo span { color: #475569; font-weight: 400; }
+  .tb-counter {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    color: #94a3b8;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 3px 12px;
+    border-radius: 99px;
+  }
+  .tb-counter b { color: var(--teal-light); }
+  .tb-actions { display: flex; gap: 8px; }
+  .tb-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #94a3b8;
+    padding: 5px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .tb-btn:hover { background: rgba(13,148,136,0.2); color: var(--teal-light); border-color: var(--teal); }
+  .tb-btn.active { background: var(--teal); color: #fff; border-color: var(--teal); }
+
+  /* ── MAIN LAYOUT ──────────────────────────────────────── */
+  #main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ── THUMBNAIL PANEL ──────────────────────────────────── */
+  #panel {
+    width: 168px;
+    background: rgba(8,15,24,0.98);
+    border-right: 1px solid rgba(13,148,136,0.15);
+    overflow-y: auto;
+    flex-shrink: 0;
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(13,148,136,0.3) transparent;
+    transition: width 0.25s ease;
+  }
+  #panel.collapsed { width: 0; padding: 0; overflow: hidden; }
+
+  .thumb {
+    position: relative;
+    cursor: pointer;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: border-color 0.15s, transform 0.15s;
+    flex-shrink: 0;
+    background: #0d1b2a;
+  }
+  .thumb:hover { border-color: rgba(13,148,136,0.5); transform: scale(1.02); }
+  .thumb.active { border-color: var(--teal); }
+  .thumb iframe {
+    width: 1280px;
+    height: 720px;
+    transform: scale(0.117);
+    transform-origin: top left;
+    pointer-events: none;
+    border: none;
+    display: block;
+  }
+  .thumb-wrap {
+    width: 150px;
+    height: 84px;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  .thumb-num {
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
+    font-size: 9px;
+    color: #475569;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .thumb.active .thumb-num { color: var(--teal-light); }
+
+  /* ── SLIDE STAGE ──────────────────────────────────────── */
+  #stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #0f1f33 0%, var(--bg) 70%);
+  }
+
+  #slide-wrapper {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(13,148,136,0.2);
+    transition: box-shadow 0.3s;
+  }
+  #slide-wrapper:hover { box-shadow: 0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(13,148,136,0.4); }
+
+  #slide-iframe {
+    border: none;
+    display: block;
+    width: 1280px;
+    height: 720px;
+    transform-origin: top left;
+  }
+
+  /* slide transition overlay */
+  #transition-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--bg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    border-radius: 8px;
+    z-index: 10;
+  }
+  #transition-overlay.flash { opacity: 1; }
+
+  /* ── BOTTOM NAV ───────────────────────────────────────── */
+  #nav {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(13,27,42,0.92);
+    border: 1px solid rgba(13,148,136,0.25);
+    border-radius: 50px;
+    padding: 8px 20px;
+    backdrop-filter: blur(16px);
+  }
+  .nav-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #cbd5e1;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.18s;
+  }
+  .nav-btn:hover:not(:disabled) { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .nav-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+
+  #progress-dots {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #334155;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .dot.active { background: var(--teal); transform: scale(1.4); }
+  .dot:hover:not(.active) { background: #64748b; transform: scale(1.2); }
+
+  /* ── FULLSCREEN MODE ──────────────────────────────────── */
+  body.fullscreen #topbar,
+  body.fullscreen #panel,
+  body.fullscreen #nav { display: none !important; }
+  body.fullscreen #main { height: 100dvh; }
+  body.fullscreen #stage { background: #000; }
+  body.fullscreen #slide-wrapper { border-radius: 0; box-shadow: none; }
+
+  /* ── KEYBOARD HINT ────────────────────────────────────── */
+  #keyhint {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 10px;
+    color: #334155;
+    text-align: right;
+    line-height: 1.8;
+    pointer-events: none;
+  }
+
+  /* ── SLIDE TITLE LABEL ────────────────────────────────── */
+  #slide-label {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: #475569;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  /* scrollbar */
+  #panel::-webkit-scrollbar { width: 4px; }
+  #panel::-webkit-scrollbar-track { background: transparent; }
+  #panel::-webkit-scrollbar-thumb { background: rgba(13,148,136,0.3); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div id="topbar">
+  <div class="tb-logo">
+    🌿 NUTRACIA
+    <span>/ AgentathonX 2026</span>
+  </div>
+  <div class="tb-counter">Slide <b id="cur">1</b> / <b>14</b></div>
+  <div class="tb-actions">
+    <button class="tb-btn" id="togglePanel" onclick="togglePanel()">
+      ☰ Slides
+    </button>
+    <button class="tb-btn" id="fsBtn" onclick="toggleFullscreen()">
+      ⛶ Fullscreen
+    </button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- THUMBNAIL PANEL -->
+  <div id="panel">
+    <!-- thumbnails injected by JS -->
+  </div>
+
+  <!-- STAGE -->
+  <div id="stage">
+    <div id="slide-label"></div>
+
+    <div id="slide-wrapper">
+      <iframe id="slide-iframe" src="slides/s1.html" scrolling="no" allowtransparency="true"></iframe>
+      <div id="transition-overlay"></div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <div id="nav">
+      <button class="nav-btn" id="prevBtn" onclick="prev()" title="Previous (←)">&#8592;</button>
+      <div id="progress-dots"></div>
+      <button class="nav-btn" id="nextBtn" onclick="next()" title="Next (→)">&#8594;</button>
+    </div>
+
+    <div id="keyhint">← → navigate &nbsp;·&nbsp; F fullscreen &nbsp;·&nbsp; T thumbnails</div>
+  </div>
+
+</div>
+
+<script>
+const SLIDES = [
+  { file: 'slides/s1.html',  title: 'Title Slide' },
+  { file: 'slides/s2.html',  title: 'Problem Statement' },
+  { file: 'slides/s3.html',  title: 'Solution Overview' },
+  { file: 'slides/s4.html',  title: 'Architecture & System Flow' },
+  { file: 'slides/s5.html',  title: 'Tech Stack' },
+  { file: 'slides/s6.html',  title: 'Key Features' },
+  { file: 'slides/s7.html',  title: 'User Journey — Demo' },
+  { file: 'slides/s8.html',  title: 'AI & Automation Pipelines' },
+  { file: 'slides/s9.html',  title: 'Impact — Real Numbers' },
+  { file: 'slides/s10.html', title: 'Challenges & Solutions' },
+  { file: 'slides/s11.html', title: 'Future Scope & Monetisation' },
+  { file: 'slides/s12.html', title: 'Project Links' },
+  { file: 'slides/s13.html', title: 'Conclusion' },
+  { file: 'slides/s14.html', title: 'Thank You' },
+];
+
+let current = 0;
+let panelOpen = true;
+const iframe = document.getElementById('slide-iframe');
+const overlay = document.getElementById('transition-overlay');
+const panel = document.getElementById('panel');
+const curEl = document.getElementById('cur');
+const labelEl = document.getElementById('slide-label');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const dotsEl = document.getElementById('progress-dots');
+const wrapper = document.getElementById('slide-wrapper');
+
+// Scale iframe to fit stage
+function scaleSlide() {
+  const stage = document.getElementById('stage');
+  const stageW = stage.clientWidth - 40;
+  const stageH = stage.clientHeight - 100;
+  const scaleX = stageW / 1280;
+  const scaleY = stageH / 720;
+  const scale = Math.min(scaleX, scaleY);
+  iframe.style.transform = `scale(${scale})`;
+  wrapper.style.width = `${1280 * scale}px`;
+  wrapper.style.height = `${720 * scale}px`;
+}
+
+// Build dots
+function buildDots() {
+  dotsEl.innerHTML = '';
+  SLIDES.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === current ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  });
+}
+
+// Build thumbnails
+function buildThumbs() {
+  panel.innerHTML = '';
+  SLIDES.forEach((slide, i) => {
+    const thumb = document.createElement('div');
+    thumb.className = 'thumb' + (i === current ? ' active' : '');
+    thumb.onclick = () => goTo(i);
+    thumb.innerHTML = `
+      <div class="thumb-wrap">
+        <iframe src="${slide.file}" scrolling="no"></iframe>
+      </div>
+      <span class="thumb-num">${i+1}</span>
+    `;
+    panel.appendChild(thumb);
+  });
+}
+
+function goTo(index, instant=false) {
+  if (index < 0 || index >= SLIDES.length) return;
+
+  // flash transition
+  overlay.classList.add('flash');
+  setTimeout(() => {
+    current = index;
+    iframe.src = SLIDES[current].file;
+    updateUI();
+    setTimeout(() => overlay.classList.remove('flash'), 80);
+  }, instant ? 0 : 120);
+}
+
+function updateUI() {
+  curEl.textContent = current + 1;
+  labelEl.textContent = SLIDES[current].title;
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === SLIDES.length - 1;
+
+  // update dots
+  dotsEl.querySelectorAll('.dot').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+
+  // update thumbs
+  panel.querySelectorAll('.thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === current);
+    if (i === current) t.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  });
+}
+
+function prev() { goTo(current - 1); }
+function next() { goTo(current + 1); }
+
+function togglePanel() {
+  panelOpen = !panelOpen;
+  panel.classList.toggle('collapsed', !panelOpen);
+  document.getElementById('togglePanel').classList.toggle('active', panelOpen);
+  setTimeout(scaleSlide, 280);
+}
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+document.addEventListener('fullscreenchange', () => {
+  document.body.classList.toggle('fullscreen', !!document.fullscreenElement);
+  setTimeout(scaleSlide, 100);
+});
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); next(); }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prev(); }
+  else if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+  else if (e.key === 't' || e.key === 'T') togglePanel();
+  else if (e.key === 'Home') goTo(0);
+  else if (e.key === 'End') goTo(SLIDES.length - 1);
+  else if (e.key >= '1' && e.key <= '9') goTo(parseInt(e.key) - 1);
+});
+
+// Touch swipe
+let touchX = null;
+document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); }
+  touchX = null;
+});
+
+// Resize
+window.addEventListener('resize', scaleSlide);
+
+// Init
+buildThumbs();
+buildDots();
+scaleSlide();
+updateUI();
+// start panel open
+document.getElementById('togglePanel').classList.add('active');
+</script>
+</body>
+</html>

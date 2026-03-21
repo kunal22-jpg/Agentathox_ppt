@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Challenges - NUTRACIA</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #0f172a;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: #0f172a;
+            overflow: hidden;
+        }
+
+        /* Subtle Background Elements */
+        .bg-element-1 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background-color: rgba(248, 113, 113, 0.05); /* Red */
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .bg-element-2 {
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(251, 146, 60, 0.05); /* Orange */
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .header {
+            padding: 2rem 4rem 1rem 4rem;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100px;
+            flex-shrink: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 0 4rem 2rem 4rem;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            overflow-y: hidden;
+        }
+
+        .challenge-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            height: 100%;
+        }
+
+        /* Challenge Card Styling */
+        .challenge-row {
+            display: flex;
+            background-color: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .challenge-row:hover {
+            background-color: rgba(30, 41, 59, 0.7);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(4px);
+        }
+
+        /* Number/Icon Column */
+        .col-id {
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(15, 23, 42, 0.3);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0 1rem;
+        }
+
+        .id-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 1;
+            opacity: 0.5;
+        }
+
+        .id-icon {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Content Columns */
+        .col-content {
+            flex: 1;
+            display: flex;
+            padding: 0.75rem 1.5rem;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .section-problem {
+            flex: 1.2;
+            padding-right: 1.5rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section-solution {
+            flex: 1.5;
+            padding-right: 1.5rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section-lesson {
+            flex: 1;
+        }
+
+        /* Typography */
+        .label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .text-body {
+            font-size: 0.8rem;
+            line-height: 1.4;
+            color: #cbd5e1;
+        }
+
+        .text-highlight {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+            color: white;
+        }
+
+        /* Color Variations */
+        .row-latency .id-number { color: #818cf8; }
+        .row-latency .id-icon { color: #818cf8; }
+        .row-latency { border-left: 4px solid #818cf8; }
+
+        .row-limits .id-number { color: #f87171; }
+        .row-limits .id-icon { color: #f87171; }
+        .row-limits { border-left: 4px solid #f87171; }
+
+        .row-storage .id-number { color: #f472b6; }
+        .row-storage .id-icon { color: #f472b6; }
+        .row-storage { border-left: 4px solid #f472b6; }
+
+        .row-webgl .id-number { color: #fb923c; }
+        .row-webgl .id-icon { color: #fb923c; }
+        .row-webgl { border-left: 4px solid #fb923c; }
+
+        .row-agent .id-number { color: #2dd4bf; }
+        .row-agent .id-icon { color: #2dd4bf; }
+        .row-agent { border-left: 4px solid #2dd4bf; }
+
+        .tech-pill {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            margin-top: 0.25rem;
+            color: #e2e8f0;
+        }
+
+    </style>
+</head>
+<body style="">
+<div class="slide-container">
+<div class="bg-element-1"></div>
+<div class="bg-element-2"></div>
+<!-- Header -->
+<div class="header">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-1 bg-red-500 rounded-full"></div>
+<p class="text-red-400 font-bold uppercase tracking-widest text-sm">Engineering Challenges</p>
+</div>
+<h1 class="text-3xl font-bold text-white leading-tight" style="font-family: 'Space Grotesk', sans-serif;">
+                We Broke Things. We Fixed Them. Here's What We Learned.
+            </h1>
+</div>
+<div class="flex items-center gap-2 bg-slate-800/80 px-4 py-2 rounded-lg border border-slate-700">
+<i class="fa-solid fa-wrench text-orange-400"></i>
+<div class="text-right">
+<p class="text-[10px] text-slate-400 uppercase tracking-wide">Status</p>
+<p class="text-sm font-bold text-white">5 Major Obstacles Solved</p>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<div class="main-content">
+<div class="challenge-container">
+<!-- Challenge 1: Latency -->
+<div class="challenge-row row-latency">
+<div class="col-id">
+<i class="fa-solid fa-stopwatch id-icon"></i>
+<span class="id-number">01</span>
+</div>
+<div class="col-content">
+<div class="section-problem">
+<p class="label text-red-400"><i class="fa-solid fa-circle-exclamation"></i> The Problem</p>
+<p class="text-highlight">Sub-800ms Voice Latency</p>
+<p class="text-body">Standard API chains (Whisper + GPT) took 2.3–3.1s round-trip. Felt robotic.</p>
+</div>
+<div class="section-solution">
+<p class="label text-green-400"><i class="fa-solid fa-check-circle"></i> The Solution</p>
+<p class="text-body">Switched to full streaming architecture: Deepgram Nova-2 + Groq + Aura. Reduced to ~630ms total.</p>
+<span class="tech-pill">Streaming Websockets</span>
+</div>
+<div class="section-lesson">
+<p class="label text-blue-400"><i class="fa-solid fa-lightbulb"></i> Key Lesson</p>
+<p class="text-body">For conversational AI, streaming &gt; request/response.</p>
+</div>
+</div>
+</div>
+<!-- Challenge 2: Rate Limits -->
+<div class="challenge-row row-limits">
+<div class="col-id">
+<i class="fa-solid fa-gauge-high id-icon"></i>
+<span class="id-number">02</span>
+</div>
+<div class="col-content">
+<div class="section-problem">
+<p class="label text-red-400"><i class="fa-solid fa-circle-exclamation"></i> The Problem</p>
+<p class="text-highlight">LLM Rate Limits (429)</p>
+<p class="text-body">Groq's free tier RPM limits caused crashes during peak usage testing.</p>
+</div>
+<div class="section-solution">
+<p class="label text-green-400"><i class="fa-solid fa-check-circle"></i> The Solution</p>
+<p class="text-body">Built backend auto-fallback. Retries via OpenAI GPT-3.5 in ~50ms if Groq fails. Invisible to user.</p>
+<span class="tech-pill">Multi-Provider Redundancy</span>
+</div>
+<div class="section-lesson">
+<p class="label text-blue-400"><i class="fa-solid fa-lightbulb"></i> Key Lesson</p>
+<p class="text-body">Never rely on a single LLM provider in production.</p>
+</div>
+</div>
+</div>
+<!-- Challenge 3: Storage -->
+<div class="challenge-row row-storage">
+<div class="col-id">
+<i class="fa-solid fa-database id-icon"></i>
+<span class="id-number">03</span>
+</div>
+<div class="col-content">
+<div class="section-problem">
+<p class="label text-red-400"><i class="fa-solid fa-circle-exclamation"></i> The Problem</p>
+<p class="text-highlight">Multimodal Storage</p>
+<p class="text-body">Diary video/audio files exceeded MongoDB Atlas free tier limits instantly.</p>
+</div>
+<div class="section-solution">
+<p class="label text-green-400"><i class="fa-solid fa-check-circle"></i> The Solution</p>
+<p class="text-body">Decoupled storage. Media to Cloudinary (CDN), only URLs stored in MongoDB. Lean &amp; fast.</p>
+<span class="tech-pill">Cloudinary API</span>
+</div>
+<div class="section-lesson">
+<p class="label text-blue-400"><i class="fa-solid fa-lightbulb"></i> Key Lesson</p>
+<p class="text-body">Databases are for data. CDNs are for media.</p>
+</div>
+</div>
+</div>
+<!-- Challenge 4: WebGL -->
+<div class="challenge-row row-webgl">
+<div class="col-id">
+<i class="fa-solid fa-mobile-screen id-icon"></i>
+<span class="id-number">04</span>
+</div>
+<div class="col-content">
+<div class="section-problem">
+<p class="label text-red-400"><i class="fa-solid fa-circle-exclamation"></i> The Problem</p>
+<p class="text-highlight">WebGL on Low-End Android</p>
+<p class="text-body">3D workout gallery ran at 2-5fps on budget devices (target demographic).</p>
+</div>
+<div class="section-solution">
+<p class="label text-green-400"><i class="fa-solid fa-check-circle"></i> The Solution</p>
+<p class="text-body">Implemented capability check. Auto-switches to CSS3 carousel if GPU memory is low.</p>
+<span class="tech-pill">Progressive Enhancement</span>
+</div>
+<div class="section-lesson">
+<p class="label text-blue-400"><i class="fa-solid fa-lightbulb"></i> Key Lesson</p>
+<p class="text-body">Your coolest feature shouldn't exclude your core users.</p>
+</div>
+</div>
+</div>
+<!-- Challenge 5: Agentic State -->
+<div class="challenge-row row-agent">
+<div class="col-id">
+<i class="fa-solid fa-diagram-project id-icon"></i>
+<span class="id-number">05</span>
+</div>
+<div class="col-content">
+<div class="section-problem">
+<p class="label text-red-400"><i class="fa-solid fa-circle-exclamation"></i> The Problem</p>
+<p class="text-highlight">Agentic State Management</p>
+<p class="text-body">Linear LangChain flows broke when complex diet/budget logic required looping.</p>
+</div>
+<div class="section-solution">
+<p class="label text-green-400"><i class="fa-solid fa-check-circle"></i> The Solution</p>
+<p class="text-body">Rebuilt with LangGraph stateful nodes. Enables planning, self-correction, and loops.</p>
+<span class="tech-pill">LangGraph State Machine</span>
+</div>
+<div class="section-lesson">
+<p class="label text-blue-400"><i class="fa-solid fa-lightbulb"></i> Key Lesson</p>
+<p class="text-body">True agents need stateful graphs, not just chains.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

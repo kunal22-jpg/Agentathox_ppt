@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Solution Overview - NUTRACIA</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #0f172a;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: #0f172a;
+            overflow: hidden;
+        }
+
+        /* Background elements */
+        .bg-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            z-index: 0;
+        }
+        .glow-1 {
+            width: 600px;
+            height: 600px;
+            background-color: #3b82f6; /* Blue */
+            top: -200px;
+            left: -200px;
+        }
+        .glow-2 {
+            width: 500px;
+            height: 500px;
+            background-color: #10b981; /* Emerald */
+            bottom: -150px;
+            right: -150px;
+        }
+
+        .header {
+            padding: 2.5rem 4rem 1rem 4rem;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 0 4rem 2.5rem 4rem;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .big-idea-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.25rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .module-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.2s;
+            height: 100%;
+            justify-content: center;
+        }
+
+        .module-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .bottom-section {
+            display: flex;
+            gap: 1.5rem;
+            height: 160px;
+        }
+
+        .flow-card {
+            flex: 2;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comparison-card {
+            flex: 1;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .flow-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1rem;
+            position: relative;
+        }
+        
+        .flow-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 0;
+            transform: translateY(-50%);
+        }
+
+        .flow-step {
+            z-index: 1;
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+        
+        .step-label {
+            position: absolute;
+            top: 40px;
+            font-size: 0.7rem;
+            color: #94a3b8;
+            width: 80px;
+            text-align: center;
+            left: -24px;
+        }
+    </style>
+</head>
+<body style="">
+<div class="slide-container">
+<!-- Background -->
+<div class="bg-glow glow-1"></div>
+<div class="bg-glow glow-2"></div>
+<!-- Header -->
+<div class="header">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-1 bg-blue-500 rounded-full"></div>
+<p class="text-blue-400 font-bold uppercase tracking-widest text-sm">Solution Overview</p>
+</div>
+<h1 class="text-4xl font-bold text-white leading-tight" style="font-family: 'Space Grotesk', sans-serif;">
+                    NUTRACIA — The AI-Agentic Wellness OS
+                </h1>
+</div>
+<div class="text-right">
+<p class="text-emerald-400 font-bold text-lg bg-emerald-500/10 px-4 py-1 rounded-full border border-emerald-500/20">
+                    100% Free • Browser-Based • Privacy-First
+                </p>
+</div>
+</div>
+<!-- Main Content -->
+<div class="main-content">
+<!-- Big Idea -->
+<div class="big-idea-card">
+<div class="bg-blue-600/20 p-3 rounded-lg">
+<i class="fa-solid fa-lightbulb text-blue-400 text-2xl"></i>
+</div>
+<div>
+<p class="text-white text-lg font-medium leading-relaxed">
+                        NUTRACIA is not an app. It is a <span class="text-blue-400">wellness operating system</span> that runs entirely in the browser.
+                        It unifies physical, mental, emotional, and nutritional health into one AI-agentic platform.
+                    </p>
+</div>
+</div>
+<!-- 10 Modules Grid -->
+<div>
+<p class="text-sm text-slate-400 uppercase tracking-wider font-semibold mb-3">The 10-Module Architecture</p>
+<div class="grid-container">
+<!-- Row 1 -->
+<div class="module-card">
+<div class="module-icon text-orange-400"><i class="fa-solid fa-dumbbell"></i></div>
+<p class="text-sm font-bold text-slate-200">Workout Plans</p>
+<p class="text-xs text-slate-500 mt-1">3D WebGL Gallery</p>
+</div>
+<div class="module-card">
+<div class="module-icon text-pink-400"><i class="fa-solid fa-spa"></i></div>
+<p class="text-sm font-bold text-slate-200">Skincare Routines</p>
+<p class="text-xs text-slate-500 mt-1">AI Skin Type Match</p>
+</div>
+<div class="module-card">
+<div class="module-icon text-green-400"><i class="fa-solid fa-carrot"></i></div>
+<p class="text-sm font-bold text-slate-200">Diet Plans</p>
+<p class="text-xs text-slate-500 mt-1">Nutrition Strategy</p>
+</div>
+<div class="module-card">
+<div class="module-icon text-yellow-400"><i class="fa-solid fa-cart-shopping"></i></div>
+<p class="text-sm font-bold text-slate-200">Grocery Agent</p>
+<p class="text-xs text-slate-500 mt-1">Agentic Shopping</p>
+</div>
+<div class="module-card">
+<div class="module-icon text-purple-400"><i class="fa-solid fa-brain"></i></div>
+<p class="text-sm font-bold text-slate-200">Mind &amp; Soul</p>
+<p class="text-xs text-slate-500 mt-1">CBT &amp; Meditation</p>
+</div>
+<!-- Row 2 -->
+<div class="module-card">
+<div class="module-icon text-indigo-400"><i class="fa-solid fa-microphone-lines"></i></div>
+<p class="text-sm font-bold text-slate-200">Voice Therapy</p>
+<p class="text-xs text-slate-500 mt-1">Real-time AI (800ms)</p>
+</div>
+<div class="module-card">
+<div class="module-icon text-rose-400"><i class="fa-solid fa-book-open"></i></div>
+<p class="text-sm font-bold text-slate-200">Anne's Diary</p>
+<p class="text-xs text-slate-500 mt-1">Emotional Journal</p>
+</div>
+<div class="module-card">
+<div class="module-icon text-red-400"><i class="fa-solid fa-map-location-dot"></i></div>
+<p class="text-sm font-bold text-slate-200">Nearby Care</p>
+<p class="text-xs text-slate-500 mt-1">Live Doctor Map</p>
+</div>
+<div class="module-card">
+<div class="module-icon text-teal-400"><i class="fa-solid fa-face-smile"></i></div>
+<p class="text-sm font-bold text-slate-200">Smile Detection</p>
+<p class="text-xs text-slate-500 mt-1">Emotional Gate</p>
+</div>
+<div class="module-card">
+<div class="module-icon text-blue-400"><i class="fa-solid fa-robot"></i></div>
+<p class="text-sm font-bold text-slate-200">AI Chatbot</p>
+<p class="text-xs text-slate-500 mt-1">24/7 Assistant</p>
+</div>
+</div>
+</div>
+<!-- Bottom Section -->
+<div class="bottom-section">
+<!-- Flow -->
+<div class="flow-card">
+<p class="text-sm text-slate-400 uppercase tracking-wider font-semibold">End-to-End User Flow</p>
+<div class="flow-steps">
+<div class="flow-line"></div>
+<div style="position: relative;">
+<div class="flow-step border-blue-500 text-blue-400"><i class="fa-solid fa-globe"></i></div>
+<p class="step-label">Browser Visit</p>
+</div>
+<div style="position: relative;">
+<div class="flow-step border-teal-500 text-teal-400"><i class="fa-solid fa-face-smile"></i></div>
+<p class="step-label">Smile Check</p>
+</div>
+<div style="position: relative;">
+<div class="flow-step border-purple-500 text-purple-400"><i class="fa-solid fa-table-columns"></i></div>
+<p class="step-label">Dashboard</p>
+</div>
+<div style="position: relative;">
+<div class="flow-step border-indigo-500 text-indigo-400"><i class="fa-solid fa-microphone"></i></div>
+<p class="step-label">Voice AI</p>
+</div>
+<div style="position: relative;">
+<div class="flow-step border-yellow-500 text-yellow-400"><i class="fa-solid fa-robot"></i></div>
+<p class="step-label">Agent Action</p>
+</div>
+<div style="position: relative;">
+<div class="flow-step border-green-500 text-green-400"><i class="fa-solid fa-heart"></i></div>
+<p class="step-label">Wellness Goal</p>
+</div>
+</div>
+</div>
+<!-- Comparison -->
+<div class="comparison-card" style="position: relative; transform: translate(4.11037px, -13.7013px);">
+<p class="text-sm text-emerald-200 uppercase tracking-wider font-bold mb-3">Why NUTRACIA?</p>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-sm text-emerald-100">
+<i class="fa-solid fa-check-circle text-emerald-400"></i>
+<p>One unified platform vs. 5 apps</p>
+</li>
+<li class="flex items-center gap-2 text-sm text-emerald-100">
+<i class="fa-solid fa-check-circle text-emerald-400"></i>
+<p>Completely free vs. subscriptions</p>
+</li>
+<li class="flex items-center gap-2 text-sm text-emerald-100">
+<i class="fa-solid fa-check-circle text-emerald-400"></i>
+<p>Real-time Voice AI vs. Text bots</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>
