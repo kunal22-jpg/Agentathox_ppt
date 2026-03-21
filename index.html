@@ -11,9 +11,6 @@
     --teal: #0d9488;
     --teal-light: #5eead4;
     --navy: #0d1b2a;
-    --navy2: #152335;
-    --muted: #64748b;
-    --white: #ffffff;
     --bg: #080f18;
   }
 
@@ -22,7 +19,7 @@
   body {
     background: var(--bg);
     font-family: 'Inter', sans-serif;
-    color: var(--white);
+    color: #fff;
     height: 100dvh;
     overflow: hidden;
     display: flex;
@@ -30,18 +27,19 @@
     user-select: none;
   }
 
-  /* TOP BAR */
+  /* ── TOP BAR ── */
   #topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
     height: 46px;
-    background: rgba(13,27,42,0.96);
+    background: rgba(13,27,42,0.97);
     border-bottom: 1px solid rgba(13,148,136,0.25);
     flex-shrink: 0;
     backdrop-filter: blur(12px);
     z-index: 100;
+    transition: opacity 0.3s, height 0.3s;
   }
   .tb-logo {
     font-family: 'Space Grotesk', sans-serif;
@@ -82,14 +80,14 @@
   .tb-btn:hover { background: rgba(13,148,136,0.2); color: var(--teal-light); border-color: var(--teal); }
   .tb-btn.active { background: var(--teal); color: #fff; border-color: var(--teal); }
 
-  /* MAIN LAYOUT */
+  /* ── MAIN ── */
   #main {
     display: flex;
     flex: 1;
     overflow: hidden;
   }
 
-  /* THUMBNAIL PANEL */
+  /* ── THUMBNAIL PANEL ── */
   #panel {
     width: 168px;
     background: rgba(8,15,24,0.98);
@@ -102,7 +100,7 @@
     gap: 6px;
     scrollbar-width: thin;
     scrollbar-color: rgba(13,148,136,0.3) transparent;
-    transition: width 0.25s ease;
+    transition: width 0.25s ease, padding 0.25s ease;
   }
   #panel.collapsed { width: 0; padding: 0; overflow: hidden; }
 
@@ -143,7 +141,7 @@
   }
   .thumb.active .thumb-num { color: var(--teal-light); }
 
-  /* SLIDE STAGE */
+  /* ── STAGE ── */
   #stage {
     flex: 1;
     display: flex;
@@ -160,10 +158,8 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(13,148,136,0.2);
-    transition: box-shadow 0.3s;
-  }
-  #slide-wrapper:hover {
-    box-shadow: 0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(13,148,136,0.4);
+    transition: box-shadow 0.3s, border-radius 0.3s;
+    cursor: pointer;
   }
 
   #slide-iframe {
@@ -172,6 +168,7 @@
     width: 1280px;
     height: 720px;
     transform-origin: top left;
+    pointer-events: none;
   }
 
   #transition-overlay {
@@ -186,7 +183,7 @@
   }
   #transition-overlay.flash { opacity: 1; }
 
-  /* BOTTOM NAV */
+  /* ── BOTTOM NAV ── */
   #nav {
     position: absolute;
     bottom: 20px;
@@ -200,6 +197,8 @@
     border-radius: 50px;
     padding: 8px 20px;
     backdrop-filter: blur(16px);
+    transition: opacity 0.3s;
+    z-index: 50;
   }
   .nav-btn {
     width: 36px; height: 36px;
@@ -215,11 +214,7 @@
   .nav-btn:hover:not(:disabled) { background: var(--teal); border-color: var(--teal); color: #fff; }
   .nav-btn:disabled { opacity: 0.25; cursor: not-allowed; }
 
-  #progress-dots {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-  }
+  #progress-dots { display: flex; gap: 5px; align-items: center; }
   .dot {
     width: 7px; height: 7px;
     border-radius: 50%;
@@ -230,38 +225,75 @@
   .dot.active { background: var(--teal); transform: scale(1.4); }
   .dot:hover:not(.active) { background: #64748b; transform: scale(1.2); }
 
-  /* FULLSCREEN */
-  body.fullscreen #topbar,
-  body.fullscreen #panel,
-  body.fullscreen #nav { display: none !important; }
-  body.fullscreen #main { height: 100dvh; }
-  body.fullscreen #stage { background: #000; }
-  body.fullscreen #slide-wrapper { border-radius: 0; box-shadow: none; }
+  /* ── THEATRE MODE (default) ── */
+  body.theatre #panel { width: 0; padding: 0; overflow: hidden; }
+  body.theatre #nav   { opacity: 0; pointer-events: none; }
+  body.theatre #topbar { opacity: 0; pointer-events: none; }
+  body.theatre #slide-wrapper { border-radius: 0; box-shadow: none; }
+  body.theatre #stage { background: #000; }
 
-  /* KEYBOARD HINT */
+  body.theatre:hover #nav    { opacity: 1; pointer-events: all; }
+  body.theatre:hover #topbar { opacity: 1; pointer-events: all; }
+
+  /* ── TRUE FULLSCREEN ── */
+  body.fullscreen #topbar { opacity: 0; pointer-events: none; }
+  body.fullscreen #panel  { width: 0; padding: 0; overflow: hidden; }
+  body.fullscreen #nav    { opacity: 0; pointer-events: none; }
+  body.fullscreen #slide-wrapper { border-radius: 0; box-shadow: none; }
+  body.fullscreen #stage  { background: #000; }
+
+  body.fullscreen:hover #nav    { opacity: 1; pointer-events: all; }
+  body.fullscreen:hover #topbar { opacity: 1; pointer-events: all; }
+
+  /* ── HINTS ── */
   #keyhint {
     position: absolute;
-    top: 12px;
+    bottom: 80px;
     right: 14px;
     font-size: 10px;
-    color: #334155;
+    color: #1e293b;
     text-align: right;
-    line-height: 1.8;
+    line-height: 1.9;
     pointer-events: none;
+    transition: opacity 0.3s;
   }
-
-  /* SLIDE TITLE */
   #slide-label {
     position: absolute;
     top: 12px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 11px;
-    color: #475569;
+    color: #1e293b;
     font-family: 'Space Grotesk', sans-serif;
     letter-spacing: 0.05em;
     white-space: nowrap;
+    transition: opacity 0.3s;
   }
+  body.theatre:hover #keyhint,
+  body.theatre:hover #slide-label,
+  body.fullscreen:hover #keyhint,
+  body.fullscreen:hover #slide-label { color: #475569; }
+
+  /* ── CLICK TO FULLSCREEN HINT ── */
+  #fs-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(13,27,42,0.85);
+    border: 1px solid rgba(13,148,136,0.4);
+    color: var(--teal-light);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.6s;
+    backdrop-filter: blur(8px);
+    white-space: nowrap;
+  }
+  #fs-hint.hidden { opacity: 0; }
 
   #panel::-webkit-scrollbar { width: 4px; }
   #panel::-webkit-scrollbar-track { background: transparent; }
@@ -270,6 +302,7 @@
 </head>
 <body>
 
+<!-- TOP BAR -->
 <div id="topbar">
   <div class="tb-logo">
     🌿 NUTRACIA
@@ -277,21 +310,22 @@
   </div>
   <div class="tb-counter">Slide <b id="cur">1</b> / <b>14</b></div>
   <div class="tb-actions">
-    <button class="tb-btn active" id="togglePanel" onclick="togglePanel()">☰ Slides</button>
+    <button class="tb-btn" id="togglePanel" onclick="togglePanel()">☰ Slides</button>
     <button class="tb-btn" id="fsBtn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
   </div>
 </div>
 
+<!-- MAIN -->
 <div id="main">
-
   <div id="panel"></div>
 
   <div id="stage">
     <div id="slide-label"></div>
 
-    <div id="slide-wrapper">
+    <div id="slide-wrapper" onclick="handleSlideClick()">
       <iframe id="slide-iframe" src="slides/s1.html" scrolling="no"></iframe>
       <div id="transition-overlay"></div>
+      <div id="fs-hint">🖱 Click to enter fullscreen &nbsp;·&nbsp; ← → to navigate</div>
     </div>
 
     <div id="nav">
@@ -300,9 +334,11 @@
       <button class="nav-btn" id="nextBtn" onclick="next()" title="Next (→)">&#8594;</button>
     </div>
 
-    <div id="keyhint">← → navigate &nbsp;·&nbsp; F fullscreen &nbsp;·&nbsp; T thumbnails</div>
+    <div id="keyhint">
+      ← → navigate &nbsp;·&nbsp; F fullscreen &nbsp;·&nbsp; T thumbnails<br>
+      Space next &nbsp;·&nbsp; 1–9 jump &nbsp;·&nbsp; Esc exit
+    </div>
   </div>
-
 </div>
 
 <script>
@@ -323,39 +359,43 @@ const SLIDES = [
   { file: 'slides/s14.html', title: 'Thank You' },
 ];
 
-let current = 0;
-let panelOpen = true;
+let current   = 0;
+let panelOpen = false;
 
-const iframe  = document.getElementById('slide-iframe');
-const overlay = document.getElementById('transition-overlay');
-const panel   = document.getElementById('panel');
-const curEl   = document.getElementById('cur');
-const labelEl = document.getElementById('slide-label');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const dotsEl  = document.getElementById('progress-dots');
-const wrapper = document.getElementById('slide-wrapper');
+const iframe   = document.getElementById('slide-iframe');
+const overlay  = document.getElementById('transition-overlay');
+const panel    = document.getElementById('panel');
+const curEl    = document.getElementById('cur');
+const labelEl  = document.getElementById('slide-label');
+const prevBtn  = document.getElementById('prevBtn');
+const nextBtn  = document.getElementById('nextBtn');
+const dotsEl   = document.getElementById('progress-dots');
+const wrapper  = document.getElementById('slide-wrapper');
+const fsHint   = document.getElementById('fs-hint');
 
+/* ── SCALE SLIDE TO FIT STAGE ── */
 function scaleSlide() {
   const stage  = document.getElementById('stage');
   const scaleX = (stage.clientWidth  - 40) / 1280;
-  const scaleY = (stage.clientHeight - 100) / 720;
+  const scaleY = (stage.clientHeight - 40) / 720;
   const scale  = Math.min(scaleX, scaleY);
   iframe.style.transform = `scale(${scale})`;
   wrapper.style.width    = `${1280 * scale}px`;
   wrapper.style.height   = `${720  * scale}px`;
 }
 
+/* ── BUILD DOTS ── */
 function buildDots() {
   dotsEl.innerHTML = '';
   SLIDES.forEach((_, i) => {
     const d = document.createElement('div');
     d.className = 'dot' + (i === current ? ' active' : '');
-    d.onclick = () => goTo(i);
+    d.onclick = (e) => { e.stopPropagation(); goTo(i); };
     dotsEl.appendChild(d);
   });
 }
 
+/* ── BUILD THUMBNAILS ── */
 function buildThumbs() {
   panel.innerHTML = '';
   SLIDES.forEach((slide, i) => {
@@ -372,6 +412,7 @@ function buildThumbs() {
   });
 }
 
+/* ── NAVIGATE ── */
 function goTo(index) {
   if (index < 0 || index >= SLIDES.length) return;
   overlay.classList.add('flash');
@@ -384,10 +425,10 @@ function goTo(index) {
 }
 
 function updateUI() {
-  curEl.textContent = current + 1;
+  curEl.textContent   = current + 1;
   labelEl.textContent = SLIDES[current].title;
-  prevBtn.disabled = current === 0;
-  nextBtn.disabled = current === SLIDES.length - 1;
+  prevBtn.disabled    = current === 0;
+  nextBtn.disabled    = current === SLIDES.length - 1;
   dotsEl.querySelectorAll('.dot').forEach((d, i) => {
     d.classList.toggle('active', i === current);
   });
@@ -400,26 +441,40 @@ function updateUI() {
 function prev() { goTo(current - 1); }
 function next() { goTo(current + 1); }
 
+/* ── PANEL TOGGLE ── */
 function togglePanel() {
   panelOpen = !panelOpen;
   panel.classList.toggle('collapsed', !panelOpen);
   document.getElementById('togglePanel').classList.toggle('active', panelOpen);
+  if (panelOpen) document.body.classList.remove('theatre');
   setTimeout(scaleSlide, 280);
 }
 
+/* ── FULLSCREEN ── */
 function toggleFullscreen() {
   if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
+    document.documentElement.requestFullscreen().catch(() => {});
   } else {
     document.exitFullscreen();
   }
 }
 
+function handleSlideClick() {
+  // First click — enter fullscreen
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+    fsHint.classList.add('hidden');
+  }
+}
+
 document.addEventListener('fullscreenchange', () => {
-  document.body.classList.toggle('fullscreen', !!document.fullscreenElement);
+  const isFS = !!document.fullscreenElement;
+  document.body.classList.toggle('fullscreen', isFS);
+  document.body.classList.toggle('theatre',    !isFS);
   setTimeout(scaleSlide, 100);
 });
 
+/* ── KEYBOARD ── */
 document.addEventListener('keydown', e => {
   if      (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
   else if (e.key === 'ArrowLeft')                   { e.preventDefault(); prev(); }
@@ -430,8 +485,13 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'Home')                        { goTo(0); }
   else if (e.key === 'End')                         { goTo(SLIDES.length - 1); }
   else if (e.key >= '1' && e.key <= '9')            { goTo(parseInt(e.key) - 1); }
+  else if (e.key === 'Escape' && !document.fullscreenElement) {
+    document.body.classList.remove('theatre');
+    panelOpen = false;
+  }
 });
 
+/* ── TOUCH SWIPE ── */
 let touchX = null;
 document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
 document.addEventListener('touchend',   e => {
@@ -441,12 +501,21 @@ document.addEventListener('touchend',   e => {
   touchX = null;
 });
 
+/* ── HIDE FULLSCREEN HINT AFTER 4s ── */
+setTimeout(() => fsHint.classList.add('hidden'), 4000);
+
+/* ── RESIZE ── */
 window.addEventListener('resize', scaleSlide);
 
+/* ── INIT ── */
 buildThumbs();
 buildDots();
 scaleSlide();
 updateUI();
+
+// Start in theatre mode (fills screen, controls hide until hover)
+document.body.classList.add('theatre');
+panel.classList.add('collapsed');
 </script>
 </body>
 </html>
