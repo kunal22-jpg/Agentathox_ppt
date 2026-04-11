@@ -1,261 +1,254 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" style=""><head>
+<html lang="en">
+<head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Links - NUTRACIA</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #0f172a;
-            color: white;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .slide-container {
-            width: 1280px;
-            height: 720px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            background-color: #0f172a;
-            overflow: hidden;
-        }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Background Elements */
-        .bg-element-1 {
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 500px;
-            height: 500px;
-            background-color: rgba(139, 92, 246, 0.03); /* Violet tint */
-            border-radius: 50%;
-            z-index: 0;
-        }
-        
-        .bg-element-2 {
-            position: absolute;
-            bottom: -150px;
-            left: -100px;
-            width: 600px;
-            height: 600px;
-            background-color: rgba(56, 189, 248, 0.03); /* Sky blue tint */
-            border-radius: 50%;
-            z-index: 0;
-        }
+  body {
+    overflow: hidden;
+    background-color: #0f172a;
+    color: white;
+    font-family: 'Inter', sans-serif;
+  }
 
-        .header {
-            padding: 3rem 4rem 1rem 4rem;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 2rem;
-            flex-shrink: 0;
-        }
+  .slide-container {
+    width: 1280px;
+    height: 720px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: #0f172a;
+    overflow: hidden;
+  }
 
-        .main-content {
-            flex: 1;
-            padding: 0 6rem 4rem 6rem;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  .bg-element-1 {
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    background-color: rgba(139, 92, 246, 0.03);
+    border-radius: 50%;
+    z-index: 0;
+  }
 
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            width: 100%;
-            max-width: 1000px;
-        }
+  .bg-element-2 {
+    position: absolute;
+    bottom: -150px;
+    left: -100px;
+    width: 600px;
+    height: 600px;
+    background-color: rgba(56, 189, 248, 0.03);
+    border-radius: 50%;
+    z-index: 0;
+  }
 
-        .link-card {
-            background-color: rgba(30, 41, 59, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            height: 160px;
-        }
+  .header {
+    padding: 3rem 4rem 1rem 4rem;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 2rem;
+    flex-shrink: 0;
+  }
 
-        .link-card:hover {
-            background-color: rgba(30, 41, 59, 0.8);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-        }
+  .main-content {
+    flex: 1;
+    padding: 0 6rem 4rem 6rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-        .icon-container {
-            width: 80px;
-            height: 80px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-        }
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    width: 100%;
+    max-width: 1000px;
+  }
 
-        .link-card:hover .icon-container {
-            transform: scale(1.1) rotate(5deg);
-        }
+  .link-card {
+    background-color: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    height: 160px;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
-        .content-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+  .link-card:hover {
+    background-color: rgba(30, 41, 59, 0.8);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  }
 
-        .link-label {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: white;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-        }
+  .icon-container {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
 
-        .link-url {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            color: #94a3b8;
-            background-color: rgba(15, 23, 42, 0.5);
-            padding: 0.5rem 0.75rem;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: block;
-        }
+  .link-card:hover .icon-container {
+    transform: scale(1.1) rotate(5deg);
+  }
 
-        .arrow-icon {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            font-size: 1.2rem;
-            opacity: 0;
-            transform: translate(-10px, 10px);
-            transition: all 0.3s ease;
-        }
+  .content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
-        .link-card:hover .arrow-icon {
-            opacity: 1;
-            transform: translate(0, 0);
-        }
+  .link-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
 
-        /* Card Themes */
-        .card-github .icon-container {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-        }
-        .card-github:hover { border-color: rgba(255, 255, 255, 0.3); }
+  .link-url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    background-color: rgba(15, 23, 42, 0.5);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
 
-        .card-devpost .icon-container {
-            background-color: rgba(6, 182, 212, 0.1); /* Cyan */
-            color: #06b6d4;
-        }
-        .card-devpost:hover { border-color: rgba(6, 182, 212, 0.3); }
+  .arrow-icon {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: translate(-10px, 10px);
+    transition: all 0.3s ease;
+  }
 
-        .card-demo .icon-container {
-            background-color: rgba(16, 185, 129, 0.1); /* Emerald */
-            color: #10b981;
-        }
-        .card-demo:hover { border-color: rgba(16, 185, 129, 0.3); }
+  .link-card:hover .arrow-icon {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
 
-        .card-video .icon-container {
-            background-color: rgba(239, 68, 68, 0.1); /* Red */
-            color: #ef4444;
-        }
-        .card-video:hover { border-color: rgba(239, 68, 68, 0.3); }
+  /* Card Themes */
+  .card-github .icon-container { background-color: rgba(255,255,255,0.1); color: #ffffff; }
+  .card-github:hover { border-color: rgba(255,255,255,0.3); }
 
-    </style>
+  .card-devpost .icon-container { background-color: rgba(6,182,212,0.1); color: #06b6d4; }
+  .card-devpost:hover { border-color: rgba(6,182,212,0.3); }
+
+  .card-demo .icon-container { background-color: rgba(16,185,129,0.1); color: #10b981; }
+  .card-demo:hover { border-color: rgba(16,185,129,0.3); }
+
+  .card-video .icon-container { background-color: rgba(239,68,68,0.1); color: #ef4444; }
+  .card-video:hover { border-color: rgba(239,68,68,0.3); }
+</style>
 </head>
-<body style="">
+<body>
 <div class="slide-container">
-<div class="bg-element-1"></div>
-<div class="bg-element-2"></div>
-<!-- Header -->
-<div class="header">
-<div class="flex items-center gap-3 mb-3">
-<div class="w-12 h-1 bg-blue-500 rounded-full"></div>
-<p class="text-blue-400 font-bold uppercase tracking-widest text-sm">Project Resources</p>
-<div class="w-12 h-1 bg-blue-500 rounded-full"></div>
-</div>
-<h1 class="text-4xl font-bold text-white leading-tight mb-2" style="font-family: 'Space Grotesk', sans-serif;">
-                Explore NUTRACIA
-            </h1>
-<p class="text-slate-400 text-lg max-w-2xl mx-auto">
-                Access the codebase, view the live deployment, or watch the demo video to see our AI agents in action.
-            </p>
-</div>
-<!-- Main Content -->
-<div class="main-content">
-<div class="links-grid">
-<!-- GitHub Card -->
-<a href="https://github.com/kunal22-jpg/Nutracia_.git" target="_blank" class="link-card card-github">
-    <div class="icon-container">
-        <i class="fa-brands fa-github"></i>
-    </div>
-    <div class="content-container">
-        <p class="link-label">Source Code</p>
-        <span class="link-url">github.com/kunal22-jpg/Nutracia_</span>
-    </div>
-    <i class="fa-solid fa-arrow-up-right-from-square arrow-icon text-white"></i>
-</a>
-<!-- Devpost Card -->
-<div class="link-card card-devpost">
-<div class="icon-container">
-<i class="fa-solid fa-code"></i>
-</div>
-<div class="content-container">
-<p class="link-label">Devpost Submission</p>
-<p class="link-url">devpost.com/software/nutracia</p>
-</div>
-<i class="fa-solid fa-arrow-up-right-from-square arrow-icon text-cyan-400"></i>
-</div>
-<!-- Live Demo Card -->
-<a href="https://nutracia-app.vercel.app" target="_blank" class="link-card card-demo">
-<div class="link-card card-demo">
-<div class="icon-container">
-<i class="fa-solid fa-globe"></i>
-</div>
-<div class="content-container">
-<p class="link-label">Live Application</p>
-<p class="link-url">nutracia-app.vercel.app</p>
-</div>
-<i class="fa-solid fa-arrow-up-right-from-square arrow-icon text-emerald-400"></i>
-</div>
-</a>
-<!-- Video Demo Card -->
-<div class="link-card card-video">
-<div class="icon-container">
-<i class="fa-brands fa-youtube"></i>
-</div>
-<div class="content-container">
-<p class="link-label">Demo Video</p>
-<p class="link-url">youtu.be/demo-video-link</p>
-</div>
-<i class="fa-solid fa-arrow-up-right-from-square arrow-icon text-red-400"></i>
-</div>
-</div>
-</div>
-</div>
+  <div class="bg-element-1"></div>
+  <div class="bg-element-2"></div>
 
-</body></html>
+  <!-- Header -->
+  <div class="header">
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+      <div style="width:3rem;height:4px;background:#3b82f6;border-radius:9999px;"></div>
+      <p style="color:#60a5fa;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-size:0.875rem;">Project Resources</p>
+      <div style="width:3rem;height:4px;background:#3b82f6;border-radius:9999px;"></div>
+    </div>
+    <h1 style="font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:700;color:white;margin-bottom:0.5rem;letter-spacing:-0.02em;">
+      Explore NUTRACIA
+    </h1>
+    <p style="color:#94a3b8;font-size:1.125rem;max-width:40rem;text-align:center;">
+      Access the codebase, view the live deployment, or watch the demo video to see our AI agents in action.
+    </p>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="links-grid">
+
+      <!-- GitHub Card -->
+      <a href="https://github.com/kunal22-jpg/Nutracia_.git" target="_blank" class="link-card card-github">
+        <div class="icon-container">
+          <i class="fa-brands fa-github"></i>
+        </div>
+        <div class="content-container">
+          <p class="link-label">Source Code</p>
+          <span class="link-url">github.com/kunal22-jpg/Nutracia_</span>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square arrow-icon" style="color:white;"></i>
+      </a>
+
+      <!-- Devpost Card -->
+      <a href="https://docs.google.com/document/d/1_Et1a8s8ae1GOjm0fiMjFDbSJwG6Z_mUmy3tfcvckNA/edit?usp=sharing" target="_blank" class="link-card card-devpost">
+        <div class="icon-container">
+          <i class="fa-solid fa-code"></i>
+        </div>
+        <div class="content-container">
+          <p class="link-label">Devpost Submission</p>
+          <span class="link-url">docs.google.com/document/nutracia</span>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square arrow-icon" style="color:#06b6d4;"></i>
+      </a>
+
+      <!-- Live Demo Card -->
+      <a href="https://nutracia1.vercel.app" target="_blank" class="link-card card-demo">
+        <div class="icon-container">
+          <i class="fa-solid fa-globe"></i>
+        </div>
+        <div class="content-container">
+          <p class="link-label">Live Application</p>
+          <span class="link-url">nutracia1.vercel.app</span>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square arrow-icon" style="color:#10b981;"></i>
+      </a>
+
+      <!-- Video Demo Card -->
+      <a href="https://youtu.be/5Xvnxb8ewtU" target="_blank" class="link-card card-video">
+        <div class="icon-container">
+          <i class="fa-brands fa-youtube"></i>
+        </div>
+        <div class="content-container">
+          <p class="link-label">Demo Video</p>
+          <span class="link-url">youtu.be/5Xvnxb8ewtU</span>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square arrow-icon" style="color:#ef4444;"></i>
+      </a>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
