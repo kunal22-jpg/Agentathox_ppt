@@ -200,7 +200,7 @@
     <div class="links-grid">
 
       <!-- GitHub Card -->
-      <a href="https://github.com/kunal22-jpg/Nutracia_.git" target="_blank" class="link-card card-github">
+      <div class="link-card card-github" onclick="openLink('https://github.com/kunal22-jpg/Nutracia_')">
         <div class="icon-container">
           <i class="fa-brands fa-github"></i>
         </div>
@@ -209,10 +209,10 @@
           <span class="link-url">github.com/kunal22-jpg/Nutracia_</span>
         </div>
         <i class="fa-solid fa-arrow-up-right-from-square arrow-icon" style="color:white;"></i>
-      </a>
+      </div>
 
       <!-- Devpost Card -->
-      <a href="https://docs.google.com/document/d/1_Et1a8s8ae1GOjm0fiMjFDbSJwG6Z_mUmy3tfcvckNA/edit?usp=sharing" target="_blank" class="link-card card-devpost">
+      <div class="link-card card-devpost" onclick="openLink('https://docs.google.com/document/d/1_Et1a8s8ae1GOjm0fiMjFDbSJwG6Z_mUmy3tfcvckNA/edit?usp=sharing')">
         <div class="icon-container">
           <i class="fa-solid fa-code"></i>
         </div>
@@ -221,10 +221,10 @@
           <span class="link-url">docs.google.com/document/nutracia</span>
         </div>
         <i class="fa-solid fa-arrow-up-right-from-square arrow-icon" style="color:#06b6d4;"></i>
-      </a>
+      </div>
 
       <!-- Live Demo Card -->
-      <a href="https://nutracia1.vercel.app" target="_blank" class="link-card card-demo">
+      <div class="link-card card-demo" onclick="openLink('https://nutracia1.vercel.app')">
         <div class="icon-container">
           <i class="fa-solid fa-globe"></i>
         </div>
@@ -233,10 +233,10 @@
           <span class="link-url">nutracia1.vercel.app</span>
         </div>
         <i class="fa-solid fa-arrow-up-right-from-square arrow-icon" style="color:#10b981;"></i>
-      </a>
+      </div>
 
       <!-- Video Demo Card -->
-      <a href="https://youtu.be/5Xvnxb8ewtU" target="_blank" class="link-card card-video">
+      <div class="link-card card-video" onclick="openLink('https://youtu.be/5Xvnxb8ewtU')">
         <div class="icon-container">
           <i class="fa-brands fa-youtube"></i>
         </div>
@@ -245,10 +245,26 @@
           <span class="link-url">youtu.be/5Xvnxb8ewtU</span>
         </div>
         <i class="fa-solid fa-arrow-up-right-from-square arrow-icon" style="color:#ef4444;"></i>
-      </a>
+      </div>
 
     </div>
   </div>
 </div>
+
+<script>
+  function openLink(url) {
+    // Try opening from the top-level window to escape any iframe sandboxing
+    try {
+      if (window.top && window.top !== window) {
+        window.top.open(url, '_blank');
+      } else {
+        window.open(url, '_blank');
+      }
+    } catch (e) {
+      // Fallback if cross-origin top access is blocked
+      window.open(url, '_blank');
+    }
+  }
+</script>
 </body>
 </html>
